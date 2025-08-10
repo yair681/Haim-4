@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חיים משמיים - קוסם לילדים</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: #1a202c;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .hero-bg-kids {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoRvnluG4LT1pPKbdpUln9qPgPqP7m-iLG9A&s');
+            background-size: cover;
+            background-position: center;
+        }
+        .text-cyan-400 { color: #22d3ee; }
+        .bg-cyan-500 { background-color: #06b6d4; }
+        .hover\:bg-cyan-600:hover { background-color: #0891b2; }
+        .zoomable-image {
+            cursor: pointer;
+            width: 100%;
+            height: 300px; /* הגובה שונה ל-300px */
+            object-fit: cover;
+        }
+        #image-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        #modal-image {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        #close-modal {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <header class="bg-gray-900 bg-opacity-80 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-center items-center">
+            <h1 class="text-2xl md:text-3xl font-bold text-cyan-400">חיים משמיים</h1>
+        </div>
+    </header>
+
+    <main>
+        <section id="home-kids" class="hero-bg-kids text-white h-screen flex items-center justify-center text-center relative">
+            <div class="absolute inset-0 bg-black opacity-60"></div>
+            <div class="relative z-10 p-6">
+                <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-down">קסמים, צחוקים והפתעות</h2>
+                <p class="text-lg md:text-2xl mb-8 text-gray-300 animate-fade-in-up">המופע שיגרום לילד שלכם להיות כוכב היום הולדת!</p>
+                <a href="#contact-kids" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105">
+                    הזמינו מופע קסמים
+                </a>
+            </div>
+        </section>
+        
+        <section id="about-kids" class="py-20 bg-gray-800">
+            <div class="container mx-auto px-6 text-center">
+                <h3 class="text-3xl md:text-4xl font-bold mb-6 text-cyan-400">הקוסם שמגשים חלומות</h3>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-10">
+                    <img src="https://www.karamel.co.il/images/karamel.co.il/images/main/1122/%D7%97%D7%99%D7%99%D7%9D_%D7%9E%D7%A9%D7%9E%D7%99%D7%99%D7%9D-2025-03-02-11-23-5070_l.webp" alt="חיים משמיים קוסם לילדים" class="w-64 h-64 rounded-full object-cover shadow-2xl border-4 border-cyan-500">
+                    <p class="max-w-2xl text-lg text-gray-300 leading-relaxed text-right md:text-left">
+                        שלום! אני חיים, קוסם שמתמחה במופעים לילדים. המופע שלי הוא שילוב קסום של קסמים מצחיקים, בלונים, הפתעות והרבה שיתוף של ילד/ת יום ההולדת והחברים. אני מבטיח להשאיר את כל הילדים עם חיוך גדול וזכרונות מתוקים מהיום המיוחד שלהם.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="shows-kids" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">מה מחכה לכם במופע?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl p-6 transform hover:-translate-y-2 transition duration-300">
+                        <h4 class="text-2xl font-bold mb-2 text-cyan-500">מופע קסמים לילדים</h4>
+                        <p class="text-gray-400">קסמים מרהיבים שמותאמים לגיל הילדים, בלונים, הפעלות והרבה צחוק. מופע של שעה וחצי שכולו חגיגה אחת גדולה!</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl p-6 transform hover:-translate-y-2 transition duration-300">
+                        <h4 class="text-2xl font-bold mb-2 text-cyan-500">ילד/ת יום ההולדת במרכז</h4>
+                        <p class="text-gray-400">ילד/ת יום ההולדת הוא העוזר הראשי שלי. הוא מקבל שרביט קסמים ומבצע איתי את הקסמים הכי גדולים!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery-kids" class="py-20 bg-gray-800">
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">גלריית רגעים קסומים</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div>
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_1.jpg" alt="תמונה 1" data-index="0">
+                        <p class="text-center text-gray-400 text-sm mt-1">תמונה 1</p>
+                    </div>
+                    <div>
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_2.jpg" alt="תמונה 2" data-index="1">
+                        <p class="text-center text-gray-400 text-sm mt-1">תמונה 2</p>
+                    </div>
+                    <div>
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="https://www.karamel.co.il/images/karamel.co.il/images/main/1122/%D7%97%D7%99%D7%99%D7%9D_%D7%9E%D7%A9%D7%9E%D7%99%D7%99%D7%9D-2025-05-25-15-59-3518_l.webp" alt="תמונה 3" data-index="2">
+                        <p class="text-center text-gray-400 text-sm mt-1">תמונה 3</p>
+                    </div>
+                    <div>
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="https://www.karamel.co.il/images/karamel.co.il/images/main/1122/%D7%97%D7%99%D7%99%D7%9D_%D7%9E%D7%A9%D7%9E%D7%99%D7%99%D7%9D-2025-03-02-11-23-1185_l.webp" alt="תמונה 4" data-index="3">
+                        <p class="text-center text-gray-400 text-sm mt-1">תמונה 4</p>
+                    </div>
+                    <div>
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_5.jpg" alt="תמונה 5" data-index="4">
+                        <p class="text-center text-gray-400 text-sm mt-1">תמונה 5</p>
+                    </div>
+                    <div>
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_6.jpg" alt="תמונה 6" data-index="5">
+                        <p class="text-center text-gray-400 text-sm mt-1">תמונה 6</p>
+                    </div>
+                    <div>
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_7.jpg" alt="תמונה 7" data-index="6">
+                        <p class="text-center text-gray-400 text-sm mt-1">תמונה 7</p>
+                    </div>
+                    <div>
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_8.jpg" alt="תמונה 8" data-index="7">
+                        <p class="text-center text-gray-400 text-sm mt-1">תמונה 8</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact-kids" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">הופכים את יום ההולדת לקסום!</h3>
+                <div class="max-w-xl mx-auto bg-gray-800 p-8 rounded-lg shadow-2xl text-center">
+                    <p class="text-xl mb-4">אל תחכו לרגע האחרון, שריינו תאריך!</p>
+                    <a href="tel:0544347168" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-12 rounded-full transition duration-300 transform hover:scale-105 inline-block">
+                        התקשרו עכשיו: 054-4347168
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <a href="https://wa.me/972544347168" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-colors duration-300 z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.04 2C7.39 2 3.65 5.74 3.65 10.39C3.65 12.06 4.14 13.63 5.02 14.98L4.17 18.23L7.54 17.39C8.84 18.17 10.39 18.6 12.04 18.6C16.69 18.6 20.44 14.86 20.44 10.21C20.44 5.56 16.69 2 12.04 2ZM15.86 14.34L15.34 14.93C14.81 15.46 14.12 15.68 13.43 15.48L12.08 14.9C11.66 14.73 11.19 14.82 10.87 15.14L9.16 16.92L8.7 16.48C8.54 16.32 8.38 16.16 8.24 16C7.57 15.03 7.15 13.9 7.15 12.72C7.15 11.53 7.57 10.4 8.24 9.43L8.7 8.99C9.02 8.67 9.49 8.76 9.91 8.93L11.26 9.51C11.95 9.71 12.64 9.49 13.17 8.96L13.69 8.37C13.88 8.18 14.15 8.08 14.43 8.14L15.65 8.4C16.32 8.56 16.89 9.13 17.05 9.8L17.2 10.39C17.38 11.08 17.15 11.77 16.62 12.3L16.02 12.89L15.86 13.06C15.53 13.38 15.53 13.91 15.86 14.23L15.86 14.34Z" />
+        </svg>
+    </a>
+
+    <footer class="bg-gray-800 border-t border-gray-700">
+        <div class="container mx-auto px-6 py-6 text-center text-gray-400">
+            <p>&copy; 2024 חיים משמיים. כל הזכויות שמורות.</p>
+        </div>
+    </footer>
+
+    <div id="image-modal" class="fixed z-50 top-0 left-0 w-full h-full bg-black bg-opacity-80 hidden flex items-center justify-center">
+        <button id="prev-button" class="absolute left-4 p-2 md:left-8 text-white rounded-full focus:outline-none bg-gray-800 bg-opacity-50 hover:bg-opacity-75 transition-colors duration-300">
+            <svg class="w-8 h-8 md:w-12 md:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+        <img id="modal-image" class="max-w-full max-h-full object-contain" src="" alt="תמונה מוגדלת">
+        <button id="next-button" class="absolute right-4 p-2 md:right-8 text-white rounded-full focus:outline-none bg-gray-800 bg-opacity-50 hover:bg-opacity-75 transition-colors duration-300">
+            <svg class="w-8 h-8 md:w-12 md:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <button id="close-modal" class="absolute top-4 left-4 p-2 bg-gray-700 text-white rounded-full w-10 h-10 flex items-center justify-center focus:outline-none hover:bg-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // JavaScript for image carousel functionality
+        const zoomableImages = document.querySelectorAll('#gallery-kids .zoomable-image');
+        const imageModal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const closeModalButton = document.getElementById('close-modal');
+
+        let currentIndex;
+        const imageUrls = Array.from(zoomableImages).map(img => img.src);
+
+        function updateModalImage() {
+            modalImage.src = imageUrls[currentIndex];
+        }
+
+        zoomableImages.forEach(img => {
+            img.addEventListener('click', (event) => {
+                currentIndex = parseInt(event.target.dataset.index);
+                updateModalImage();
+                imageModal.style.display = 'flex';
+            });
+        });
+
+        prevButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : imageUrls.length - 1;
+            updateModalImage();
+        });
+
+        nextButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex < imageUrls.length - 1) ? currentIndex + 1 : 0;
+            updateModalImage();
+        });
+        
+        closeModalButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            imageModal.style.display = 'none';
+        });
+
+        imageModal.addEventListener('click', (event) => {
+            if (event.target === imageModal) {
+                imageModal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
