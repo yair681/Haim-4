@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -31,11 +30,16 @@
             height: 150px; /* גובה קבוע לתמונות במובייל */
             object-fit: cover;
         }
+        .gallery-video {
+            width: 100%;
+            height: auto; /* גובה אוטומטי לסרטון */
+            cursor: pointer;
+        }
 
         /* במחשבים שולחניים, חוזר לגובה המקורי */
         @media (min-width: 640px) {
             .zoomable-image {
-                height: 300px; 
+                height: 300px;
             }
         }
         #image-modal {
@@ -134,8 +138,8 @@
                         <p class="text-center text-gray-400 text-sm mt-1">תמונה 3</p>
                     </div>
                     <div>
-                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="https://www.karamel.co.il/images/karamel.co.il/images/main/1122/%D7%97%D7%99%D7%99%D7%9D_%D7%9E%D7%A9%D7%9E%D7%99%D7%99%D7%9D-2025-03-02-11-23-1185_l.webp" alt="תמונה 4" data-index="3">
-                        <p class="text-center text-gray-400 text-sm mt-1">תמונה 4</p>
+                        <video class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 gallery-video" src="promo_video_haim.mp4" controls playsinline muted loop></video>
+                        <p class="text-center text-gray-400 text-sm mt-1">סרטון תדמית</p>
                     </div>
                     <div>
                         <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_5.jpg" alt="תמונה 5" data-index="4">
@@ -157,6 +161,59 @@
             </div>
         </section>
         
+        <section id="articles" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">כתבות עליי</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-xl border border-gray-700">
+                        <h4 class="text-xl font-bold mb-2 text-cyan-500">קסם של שמחה - 'חיים משמיים'</h4>
+                        <p class="text-gray-400 mb-4">פורסם ב'ניוז חיפה והקריות': 2024</p>
+                        <p class="text-gray-300 italic mb-4">
+                            "כתבה מרגשת על קוסם הילדים חיים משמיים שהפך את הקסם משמיים למופע של שמחה על פני האדמה..."
+                        </p>
+                        <a href="https://newshaifakrayot.net/?p=361806" target="_blank" class="text-cyan-400 hover:text-cyan-300 font-semibold">קראו עוד »</a>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-xl border border-gray-700">
+                        <h4 class="text-xl font-bold mb-2 text-cyan-500">כתבה עם הקוסם חיים משמיים בכיכר השבת</h4>
+                        <p class="text-gray-400 mb-4">פורסם ב'כיכר השבת': 2024</p>
+                        <p class="text-gray-300 italic mb-4">
+                            "כתבה על אמונה וקסמים, המשלבת ראיון עם קוסם הילדים חיים משמיים..."
+                        </p>
+                        <a href="https://www.kikar.co.il/haredim-news/t0gysn" target="_blank" class="text-cyan-400 hover:text-cyan-300 font-semibold">קראו עוד »</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="full-details" class="py-20 bg-gray-800">
+            <div class="container mx-auto px-6">
+                <div class="max-w-2xl mx-auto text-right md:text-right">
+                    <p class="text-xl mb-4">היי מזל טוב מזל טוב❤❤</p>
+                    <p class="text-lg text-gray-300 mb-4">
+                        אשמח לשמח אתכם בהפקת יום הולדת מושלמת מהקסמים..
+                        כנסו ל<a href="https://www.facebook.com/profile.php?id=100014056531099" target="_blank" class="text-cyan-400 hover:text-cyan-300 font-semibold">פייסבוק שלי חיים משמיים</a>
+                        או ל<a href="https://greenbook.co.il/card/4143/15812" target="_blank" class="text-cyan-400 hover:text-cyan-300 font-semibold">כרטיס הביקור המצורף כאן למטה</a>
+                        על מנת להציץ על המופע המהפנט, המרהיב והמצחיק במיוחד שלי ומפרגונים של לקוחותיי...
+                    </p>
+                    <p class="text-lg text-gray-300 mb-4">
+                        אני חיים משמיים  קוסם,להטוטן אש ואומן חושים לילדים, נוער ומבוגרים, בהתאמה מלאה לכל גיל בשילוב תפאורה מפוארת, קסמים מרהיבים, קסם ריחוף מעל החרבות, בובות ענק, בלוני צורות, פרסים לכולם, מחצלות, הגברה מקצועית ביותר, מכונת בועות סבון,  מכונת עשן, כדורי אורות, גב במה מפואר, שולחן מלא קסמים, הזמנה דיגטלית מונפשת עם תמונות החוגג/ת ואישורי הגעה.
+                    </p>
+                    <p class="text-lg text-gray-300 mb-4">
+                        כמו כן טקס עוגה מרגש, תחרויות, קונפטי מתפוצץ באוויר ובעיקר העצמה העצמה ושוב העצמה לחוגג/ת..(מגיע מעולם החינוך ובעל ניסיון גדול בעבודה מולם)
+                    </p>
+                    <p class="text-xl font-bold text-cyan-400 mb-4">
+                        אז כמו שכתבתי הפקה מהקסמים!!
+                    </p>
+                    <p class="text-lg text-gray-300 mb-4">
+                        פלאפון להזמנות ולפרטים נוספים:  <a href="tel:0544347168" class="text-cyan-400 hover:text-cyan-300 font-semibold">0544347168</a> לכל הארץ
+                    </p>
+                    <p class="text-lg text-gray-300">
+                        אשמח לשמח אתכם...😉חיים משמיים הקוסם🌈🌈 לשעתיים מלאות
+                    </p>
+                </div>
+            </div>
+        </section>
+
         <section id="testimonials" class="py-20 bg-gray-900">
             <div class="container mx-auto px-6">
                 <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">מה ההורים אומרים?</h3>
@@ -189,10 +246,10 @@
             </div>
         </section>
         
-        <section id="contact-kids" class="py-20 bg-gray-800">
+        <section id="contact-kids" class="py-20 bg-gray-900">
             <div class="container mx-auto px-6">
                 <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">הופכים את יום ההולדת לקסום!</h3>
-                <div class="max-w-xl mx-auto bg-gray-900 p-8 rounded-lg shadow-2xl text-center">
+                <div class="max-w-xl mx-auto bg-gray-800 p-8 rounded-lg shadow-2xl text-center">
                     <p class="text-xl mb-4">אל תחכו לרגע האחרון, שריינו תאריך!</p>
                     <a href="tel:0544347168" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-12 rounded-full transition duration-300 transform hover:scale-105 inline-block">
                         התקשרו עכשיו: 054-4347168
