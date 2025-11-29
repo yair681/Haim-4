@@ -21,14 +21,36 @@
         }
         .hero-bg-kids {
             background-image: url('kids_img_10.jpg');
-            background-size: cover;
+            background-size: contain;
             background-position: center;
+            background-repeat: no-repeat;
+            background-color: #1a202c;
         }
         
         /* שינוי מיקום התמונה במובייל כדי שהפנים לא יוסתרו */
         @media (max-width: 768px) {
-            .hero-bg-kids {
-                background-position: top;
+            #home-kids.hero-bg-kids {
+                background-position: center center !important;
+                min-height: 100vh !important;
+                height: auto !important;
+            }
+            /* התאמות נוספות למובייל */
+            .hero-section-content {
+                padding: 1rem;
+            }
+        }
+
+        /* במסכים קטנים מאוד */
+        @media (max-width: 480px) {
+            #home-kids.hero-bg-kids {
+                min-height: 100vh !important;
+            }
+        }
+
+        /* במסכים בינוניים */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            #home-kids.hero-bg-kids {
+                min-height: 600px !important;
             }
         }
 
@@ -38,19 +60,34 @@
         .zoomable-image {
             cursor: pointer;
             width: 100%;
-            height: 150px; /* גובה קבוע לתמונות במובייל */
+            height: 200px; /* גובה קבוע לתמונות במובייל */
             object-fit: cover;
+            object-position: center;
         }
         .gallery-video {
             width: 100%;
-            height: auto; /* גובה אוטומטי לסרטון */
+            height: 200px; /* גובה תואם לתמונות */
+            object-fit: cover;
             cursor: pointer;
         }
 
-        /* במחשבים שולחניים, חוזר לגובה המקורי */
+        /* במסכים בינוניים */
         @media (min-width: 640px) {
             .zoomable-image {
-                height: 300px;
+                height: 220px;
+            }
+            .gallery-video {
+                height: 220px;
+            }
+        }
+
+        /* במחשבים שולחניים, חוזר לגובה גדול יותר */
+        @media (min-width: 1024px) {
+            .zoomable-image {
+                height: 280px;
+            }
+            .gallery-video {
+                height: 280px;
             }
         }
         #image-modal {
@@ -82,110 +119,303 @@
             transition: 0.3s;
             cursor: pointer;
         }
+        
+        /* ********************************************************* */
+        /* CSS נגישות - A11Y STYLES & MODALS */
+        /* ********************************************************* */
+        
+        /* Floating Accessibility Button */
+        #a11y-toggle-button {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 10001;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            background-color: #06b6d4; /* cyan-500 */
+            color: white;
+            border-radius: 50%;
+        }
+
+        /* Accessibility Panel */
+        .a11y-panel {
+            position: fixed;
+            left: -150px; /* Start off-screen */
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #2d3748; /* gray-700 */
+            border: 1px solid #4a5568; /* gray-600 */
+            padding: 10px;
+            border-radius: 8px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: left 0.3s ease-in-out;
+        }
+
+        .a11y-panel.a11y-panel-open {
+            left: 80px; /* Slide onto screen */
+        }
+
+        .a11y-panel button {
+            background-color: #4a5568; /* gray-600 */
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+            font-size: 14px;
+            line-height: 1.2;
+            min-width: 100px;
+        }
+
+        .a11y-panel button:hover {
+            background-color: #2b6cb0; /* blue-700 */
+        }
+        
+        /* Modals */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 20000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: #2d3748; /* gray-700 */
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #4a5568;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 8px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .close-btn {
+            color: #aaa;
+            float: left;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            cursor: pointer;
+        }
+        
+        .close-btn:hover,
+        .close-btn:focus {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            right: 50%;
+            transform: translateX(50%);
+            padding: 8px 12px;
+            background: #06b6d4; /* cyan-500 */
+            color: white;
+            font-weight: bold;
+            z-index: 10001;
+            transition: top 0.3s;
+            text-decoration: none;
+            border-radius: 0 0 8px 8px;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Accessibility Modes */
+        .a11y-high-contrast {
+            filter: none !important;
+            background-color: black !important;
+            color: yellow !important;
+        }
+
+        .a11y-high-contrast * {
+            background-color: black !important;
+            color: yellow !important;
+        }
+
+        .a11y-high-contrast .text-cyan-400, .a11y-high-contrast .text-cyan-500 {
+            color: white !important;
+        }
+        
+        /* Overriding specific element backgrounds in high contrast */
+        .a11y-high-contrast .hero-bg-kids {
+            background-color: black !important; /* Preserve background image */
+        }
+        .a11y-high-contrast .bg-gray-900, .a11y-high-contrast .bg-gray-800, .a11y-high-contrast .bg-gray-700 {
+            background-color: black !important;
+        }
+        .a11y-high-contrast .bg-cyan-500 {
+            background-color: yellow !important;
+            color: black !important;
+        }
+
+        .a11y-grayscale {
+            filter: grayscale(100%);
+        }
+
+        .a11y-large-text * {
+            font-size: 1.2em !important;
+            line-height: 1.6 !important;
+        }
+
+        .a11y-large-cursor {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="yellow" stroke="black" stroke-width="2"/></svg>') 15 15, auto !important;
+        }
+
+        .a11y-focus-highlight *:focus {
+            outline: 3px solid yellow !important;
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-white">
+    
+    <a href="#main-content-start" class="skip-link" aria-label="דלג לתוכן הראשי">דלג לתוכן הראשי</a>
+
+    <button id="a11y-toggle-button" aria-expanded="false" aria-controls="a11y-panel" title="פתח תפריט נגישות">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-accessibility">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 7a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"></path>
+            <path d="M8 17s1.5-3 4-3 4 3 4 3"></path>
+            <path d="M12 11v6"></path>
+        </svg>
+    </button>
+    
+    <div class="a11y-panel" id="a11y-panel" role="toolbar" aria-label="תפריט נגישות">
+        <button id="toggle-contrast" aria-pressed="false" title="ניגודיות גבוהה">ניגודיות</button>
+        <button id="toggle-grayscale" aria-pressed="false" title="גווני אפור">גווני אפור</button>
+        <button id="increase-text" title="הגדלת טקסט">הגדלת טקסט</button>
+        <button id="toggle-cursor" aria-pressed="false" title="סמן גדול">סמן גדול</button>
+        <button id="toggle-focus" aria-pressed="false" title="הדגשת פוקוס">הדגשת פוקוס</button>
+        <button id="reset-a11y" title="איפוס הגדרות נגישות">איפוס נגישות</button>
+    </div>
 
     <header class="bg-gray-900 bg-opacity-80 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
-        <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-center items-center">
-            <h1 class="text-2xl md:text-3xl font-bold text-cyan-400">חיים משמיים</h1>
+        <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex flex-col md:flex-row justify-center items-center">
+            <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-cyan-400">חיים משמיים</h1>
         </div>
     </header>
 
-    <main>
-        <section id="home-kids" class="hero-bg-kids text-white h-screen flex items-end justify-center text-center relative">
-            <div class="absolute inset-0 bg-black opacity-60"></div>
-            <div class="relative z-10 p-6 pb-20">
-                <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-down">קסמים, צחוקים והפתעות</h2>
-                <p class="text-lg md:text-2xl mb-8 text-gray-300 animate-fade-in-up">המופע שיגרום לילד שלכם להיות כוכב היום הולדת!</p>
-                <a href="#contact-kids" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105">
-                    הזמינו מופע קסמים
-                </a>
+    <main id="main-content-start"> 
+        <section id="home-kids" class="text-white text-center relative">
+            <div class="relative w-full">
+                <img src="kids_img_10.jpg" alt="חיים משמיים קוסם לילדים" class="w-full h-auto" style="display: block; max-height: 100vh; object-fit: contain; margin: 0 auto;" />
+                <div class="absolute inset-0 bg-black opacity-60"></div>
+                <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 hero-section-content">
+                    <div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight mb-3 sm:mb-4 animate-fade-in-down">קסמים, צחוקים והפתעות</h2>
+                        <p class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mb-6 sm:mb-8 md:mb-10 text-gray-300 animate-fade-in-up px-2">המופע שיגרום לילד שלכם להיות כוכב היום הולדת!</p>
+                        <a href="tel:0544347168" class="inline-block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 sm:py-3 px-6 sm:px-8 rounded-full text-base sm:text-lg md:text-xl transition duration-300 transform hover:scale-105">
+                            הזמינו מופע קסמים
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
         
-        <section id="about-kids" class="py-20 bg-gray-800">
-            <div class="container mx-auto px-6 text-center">
-                <h3 class="text-3xl md:text-4xl font-bold mb-6 text-cyan-400">הקוסם שמגשים חלומות</h3>
-                <div class="flex flex-col md:flex-row items-center justify-center gap-10">
-                    <img src="https://www.karamel.co.il/images/karamel.co.il/images/main/1122/%D7%97%D7%99%D7%99%D7%9D_%D7%9E%D7%A9%D7%9E%D7%99%D7%99%D7%9D-2025-03-02-11-23-5070_l.webp" alt="חיים משמיים קוסם לילדים" class="w-64 h-64 rounded-full object-cover shadow-2xl border-4 border-cyan-500">
-                    <p class="max-w-2xl text-lg text-gray-300 leading-relaxed text-right md:text-left">
+        <section id="about-kids" class="py-12 sm:py-16 md:py-20 bg-gray-800">
+            <div class="container mx-auto px-4 sm:px-6 text-center">
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-cyan-400">הקוסם שמגשים חלומות</h3>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-8 md:gap-10">
+                    <img src="https://www.karamel.co.il/images/karamel.co.il/images/main/1122/%D7%97%D7%99%D7%99%D7%9D_%D7%9E%D7%A9%D7%9E%D7%99%D7%99%D7%9D-2025-03-02-11-23-5070_l.webp" alt="חיים משמיים קוסם לילדים" class="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full object-cover shadow-2xl border-4 border-cyan-500 flex-shrink-0">
+                    <p class="max-w-2xl text-base sm:text-lg text-gray-300 leading-relaxed text-right px-2">
                         שלום! אני חיים, קוסם שמתמחה במופעים לילדים. המופע שלי הוא שילוב קסום של קסמים מצחיקים, בלונים, הפתעות והרבה שיתוף של ילד/ת יום ההולדת והחברים. אני מבטיח להשאיר את כל הילדים עם חיוך גדול וזכרונות מתוקים מהיום המיוחד שלהם.
                     </p>
                 </div>
             </div>
         </section>
         
-        <section id="shows-kids" class="py-20 bg-gray-900">
-            <div class="container mx-auto px-6">
-                <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">מה מחכה לכם במופע?</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl p-6 transform hover:-translate-y-2 transition duration-300">
-                        <h4 class="text-2xl font-bold mb-2 text-cyan-500">מופע קסמים לילדים</h4>
-                        <p class="text-gray-400">קסמים מרהיבים שמותאמים לגיל הילדים, בלונים, הפעלות והרבה צחוק. מופע של שעה וחצי שכולו חגיגה אחת גדולה!</p>
+        <section id="shows-kids" class="py-12 sm:py-16 md:py-20 bg-gray-900">
+            <div class="container mx-auto px-4 sm:px-6">
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-10 md:mb-12 text-cyan-400">מה מחכה לכם במופע?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl p-6 sm:p-8 transform hover:-translate-y-2 transition duration-300 text-right">
+                        <h4 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-cyan-500">מופע קסמים לילדים</h4>
+                        <p class="text-sm sm:text-base text-gray-400">קסמים מרהיבים שמותאמים לגיל הילדים, בלונים, הפעלות והרבה צחוק. מופע של שעה וחצי שכולו חגיגה אחת גדולה!</p>
                     </div>
-                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl p-6 transform hover:-translate-y-2 transition duration-300">
-                        <h4 class="text-2xl font-bold mb-2 text-cyan-500">ילד/ת יום ההולדת במרכז</h4>
-                        <p class="text-gray-400">ילד/ת יום ההולדת הוא העוזר הראשי שלי. הוא מקבל שרביט קסמים ומבצע איתי את הקסמים הכי גדולים!</p>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl p-6 sm:p-8 transform hover:-translate-y-2 transition duration-300 text-right">
+                        <h4 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-cyan-500">ילד/ת יום ההולדת במרכז</h4>
+                        <p class="text-sm sm:text-base text-gray-400">ילד/ת יום ההולדת הוא העוזר הראשי שלי. הוא מקבל שרביט קסמים ומבצע איתי את הקסמים הכי גדולים!</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="gallery-kids" class="py-20 bg-gray-800">
-            <div class="container mx-auto px-6">
-                <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">גלריית רגעים קסומים</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-0">
-                    <div class="p-0 m-0">
-                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_1.jpg" alt="תמונה 1" data-index="0" />
-                        <p class="text-center text-gray-400 text-sm m-0 p-0">תמונה 1</p>
+        <section id="gallery-kids" class="py-12 sm:py-16 md:py-20 bg-gray-800">
+            <div class="container mx-auto px-4 sm:px-6">
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-10 md:mb-12 text-cyan-400">גלריית רגעים קסומים</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                    <div class="p-0 m-0 overflow-hidden">
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_1.jpg" alt="קוסם חיים מחזיק בלוני צורות מול קהל ילדים" data-index="0" />
+                        <p class="text-center text-gray-400 text-xs sm:text-sm m-0 p-1">תמונה 1</p>
                     </div>
-                    <div class="p-0 m-0">
-                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_2.jpg" alt="תמונה 2" data-index="1" />
-                        <p class="text-center text-gray-400 text-sm m-0 p-0">תמונה 2</p>
+                    <div class="p-0 m-0 overflow-hidden">
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_2.jpg" alt="קוסם עם ילד יום הולדת מבצעים קסם" data-index="1" />
+                        <p class="text-center text-gray-400 text-xs sm:text-sm m-0 p-1">תמונה 2</p>
                     </div>
-                    <div class="p-0 m-0">
+                    <div class="p-0 m-0 overflow-hidden">
                         <img
                             class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image"
                             src="https://www.karamel.co.il/images/karamel.co.il/images/main/1122/%D7%97%D7%99%D7%99%D7%9D_%D7%9E%D7%A9%D7%9E%D7%99%D7%99%D7%9D-2025-05-25-15-59-3518_l.webp"
-                            alt="תמונה 3"
+                            alt="הקוסם חיים עושה קסם ריחוף במופע"
                             data-index="2"
                         />
-                        <p class="text-center text-gray-400 text-sm m-0 p-0">תמונה 3</p>
+                        <p class="text-center text-gray-400 text-xs sm:text-sm m-0 p-1">תמונה 3</p>
                     </div>
-                    <div class="p-0 m-0">
-                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_3.jpg" alt="תמונה 3 נוספת" data-index="3" />
-                        <p class="text-center text-gray-400 text-sm m-0 p-0">תמונה 4</p>
+                    <div class="p-0 m-0 overflow-hidden">
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_3.jpg" alt="קוסם מלהטט בכדורים" data-index="3" />
+                        <p class="text-center text-gray-400 text-xs sm:text-sm m-0 p-1">תמונה 4</p>
                     </div>
-                    <div class="p-0 m-0">
-                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_6.jpg" alt="תמונה 6" data-index="5" />
-                        <p class="text-center text-gray-400 text-sm m-0 p-0">תמונה 6</p>
+                    <div class="p-0 m-0 overflow-hidden">
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_6.jpg" alt="ילדים צוחקים במופע קסמים" data-index="5" />
+                        <p class="text-center text-gray-400 text-xs sm:text-sm m-0 p-1">תמונה 6</p>
                     </div>
-                    <div class="p-0 m-0">
-                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_8.jpg" alt="תמונה 8" data-index="7" />
-                        <p class="text-center text-gray-400 text-sm m-0 p-0">תמונה 8</p>
+                    <div class="p-0 m-0 overflow-hidden">
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_8.jpg" alt="תמונת קלוזאפ של הקוסם חיים עם חיוך רחב" data-index="7" />
+                        <p class="text-center text-gray-400 text-xs sm:text-sm m-0 p-1">תמונה 8</p>
                     </div>
-                    <div class="p-0 m-0">
-                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_7.jpg" alt="תמונה 7" data-index="6" />
-                        <p class="text-center text-gray-400 text-sm m-0 p-0">תמונה 7</p>
+                    <div class="p-0 m-0 overflow-hidden">
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_7.jpg" alt="קוסם חיים מעיף כובע" data-index="6" />
+                        <p class="text-center text-gray-400 text-xs sm:text-sm m-0 p-1">תמונה 7</p>
                     </div>
-                    <div class="p-0 m-0">
-                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_5.jpg" alt="תמונה 5" data-index="4" />
-                        <p class="text-center text-gray-400 text-sm m-0 p-0">תמונה 5</p>
+                    <div class="p-0 m-0 overflow-hidden">
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_5.jpg" alt="ילדי יום הולדת עוזרים לקוסם" data-index="4" />
+                        <p class="text-center text-gray-400 text-xs sm:text-sm m-0 p-1">תמונה 5</p>
                     </div>
-                    <div class="p-0 m-0">
-                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_9.jpg" alt="תמונה 9" data-index="8" />
-                        <p class="text-center text-gray-400 text-sm m-0 p-0">תמונה 9</p>
+                    <div class="p-0 m-0 overflow-hidden">
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_9.jpg" alt="הקוסם חיים מחזיק נחש מבלונים" data-index="8" />
+                        <p class="text-center text-gray-400 text-xs sm:text-sm m-0 p-1">תמונה 9</p>
                     </div>
-                    <div class="p-0 m-0">
-                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_11.jpg" alt="תמונה 11" data-index="9" />
-                        <p class="text-center text-gray-400 text-sm m-0 p-0">תמונה 11</p>
+                    <div class="p-0 m-0 overflow-hidden">
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_11.jpg" alt="קוסם חיים עם ילד מחזיקים שרביט קסמים" data-index="9" />
+                        <p class="text-center text-gray-400 text-xs sm:text-sm m-0 p-1">תמונה 11</p>
                     </div>
-                    <div class="p-0 m-0">
-                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_12.jpg" alt="תמונה 12" data-index="10" />
-                        <p class="text-center text-gray-400 text-sm m-0 p-0">תמונה 12</p>
+                    <div class="p-0 m-0 overflow-hidden">
+                        <img class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 zoomable-image" src="kids_img_12.jpg" alt="הקוסם חיים על הבמה" data-index="10" />
+                        <p class="text-center text-gray-400 text-xs sm:text-sm m-0 p-1">תמונה 12</p>
                     </div>
-                    <div class="p-0 m-0">
+                    <div class="p-0 m-0 overflow-hidden">
                         <video
                             class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 gallery-video"
                             src="promo_video_haim.mp4"
@@ -193,125 +423,164 @@
                             playsinline
                             muted
                             loop
+                            aria-label="סרטון תדמית של המופע הקסום של חיים משמיים"
                         ></video>
-                        <p class="text-center text-gray-400 text-sm m-0 p-0">סרטון תדמית</p>
+                        <p class="text-center text-gray-400 text-xs sm:text-sm m-0 p-1">סרטון תדמית</p>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section id="articles" class="py-20 bg-gray-900">
-            <div class="container mx-auto px-6">
-                <h3 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">כתבות עליי</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-gray-800 p-6 rounded-lg shadow-xl border border-gray-700">
-                        <h4 class="text-xl font-bold mb-2 text-cyan-500">קסם של שמחה - 'חיים משמיים'</h4>
-                        <p class="text-gray-400 mb-4">פורסם ב'ניוז חיפה והקריות': 2024</p>
-                        <p class="text-gray-300 italic mb-4">
+        <section id="articles" class="py-12 sm:py-16 md:py-20 bg-gray-900">
+            <div class="container mx-auto px-4 sm:px-6">
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-10 md:mb-12 text-cyan-400">כתבות עליי</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                    <div class="bg-gray-800 p-5 sm:p-6 rounded-lg shadow-xl border border-gray-700 text-right">
+                        <h4 class="text-lg sm:text-xl font-bold mb-2 text-cyan-500">קסם של שמחה - 'חיים משמיים'</h4>
+                        <p class="text-sm sm:text-base text-gray-400 mb-3 sm:mb-4">פורסם ב'ניוז חיפה והקריות': 2024</p>
+                        <p class="text-sm sm:text-base text-gray-300 italic mb-3 sm:mb-4">
                             "כתבה מרגשת על קוסם הילדים חיים משמיים שהפך את הקסם משמיים למופע של שמחה על פני האדמה..."
                         </p>
-                        <a href="https://newshaifakrayot.net/?p=361806" target="_blank" class="text-cyan-400 hover:text-cyan-300 font-semibold">קראו עוד »</a>
+                        <a href="https://newshaifakrayot.net/?p=361806" target="_blank" class="text-sm sm:text-base text-cyan-400 hover:text-cyan-300 font-semibold">קראו עוד »</a>
                     </div>
-                    <div class="bg-gray-800 p-6 rounded-lg shadow-xl border border-gray-700">
-                        <h4 class="text-xl font-bold mb-2 text-cyan-500">כתבה עם הקוסם חיים משמיים בכיכר השבת</h4>
-                        <p class="text-gray-400 mb-4">פורסם ב'כיכר השבת': 2024</p>
-                        <p class="text-gray-300 italic mb-4">
+                    <div class="bg-gray-800 p-5 sm:p-6 rounded-lg shadow-xl border border-gray-700 text-right">
+                        <h4 class="text-lg sm:text-xl font-bold mb-2 text-cyan-500">כתבה עם הקוסם חיים משמיים בכיכר השבת</h4>
+                        <p class="text-sm sm:text-base text-gray-400 mb-3 sm:mb-4">פורסם ב'כיכר השבת': 2024</p>
+                        <p class="text-sm sm:text-base text-gray-300 italic mb-3 sm:mb-4">
                             "כתבה על אמונה וקסמים, המשלבת ראיון עם קוסם הילדים חיים משמיים..."
                         </p>
-                        <a href="https://www.kikar.co.il/haredim-news/t0gysn" target="_blank" class="text-cyan-400 hover:text-cyan-300 font-semibold">קראו עוד »</a>
+                        <a href="https://www.kikar.co.il/haredim-news/t0gysn" target="_blank" class="text-sm sm:text-base text-cyan-400 hover:text-cyan-300 font-semibold">קראו עוד »</a>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section id="full-details" class="py-20 bg-gray-800">
-            <div class="container mx-auto px-6">
-                <div class="max-w-2xl mx-auto text-right md:text-right">
-                    <p class="text-xl mb-4">היי מזל טוב מזל טוב❤❤</p>
-                    <p class="text-lg text-gray-300 mb-4">
+        <section id="full-details" class="py-12 sm:py-16 md:py-20 bg-gray-800">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-3xl mx-auto text-right">
+                    <p class="text-lg sm:text-xl mb-3 sm:mb-4">היי מזל טוב מזל טוב❤❤</p>
+                    <p class="text-sm sm:text-base md:text-lg text-gray-300 mb-3 sm:mb-4">
                         אשמח לשמח אתכם בהפקת יום הולדת מושלמת מהקסמים..
                         כנסו ל<a href="https://www.facebook.com/hyym.msmyym?mibextid=ZbWKwL" target="_blank" class="text-cyan-400 hover:text-cyan-300 font-semibold">פייסבוק שלי חיים משמיים</a>
                         או ל<a href="https://greenbook.co.il/card/4143/15812" target="_blank" class="text-cyan-400 hover:text-cyan-300 font-semibold">כרטיס הביקור המצורף כאן למטה</a>
                         על מנת להציץ על המופע המהפנט, המרהיב והמצחיק במיוחד שלי ומפרגונים של לקוחותיי...
                     </p>
-                    <p class="text-lg text-gray-300 mb-4">
+                    <p class="text-sm sm:text-base md:text-lg text-gray-300 mb-3 sm:mb-4">
                         אני חיים משמיים  קוסם,להטוטן אש ואומן חושים לילדים, נוער ומבוגרים, בהתאמה מלאה לכל גיל בשילוב תפאורה מפוארת, קסמים מרהיבים, קסם ריחוף מעל החרבות, בובות ענק, בלוני צורות, פרסים לכולם, מחצלות, הגברה ותאורה צבעונית, אפקטים של עשן ואש ובקיצור, כל מה שצריך כדי להפוך כל אירוע לחגיגה גדולה!
                     </p>
-                    <p class="text-lg text-gray-300 mb-4">
+                    <p class="text-sm sm:text-base md:text-lg text-gray-300 mb-3 sm:mb-4">
                         כל אירוע ויום הולדת הוא בשבילי כמו מופע חדש וכל פעם מחדש אני משקיע המון כדי לשמח ולהקסים אתכם.
                     </p>
-                    <p class="text-lg text-gray-300 mb-4">
+                    <p class="text-sm sm:text-base md:text-lg text-gray-300 mb-3 sm:mb-4">
                         במופע שלי הילדים הם העוזרים שלי – מי שזוכה לקבל את השרביט ולפזר קסמים לילדים האחרים. ההרשמה מראש ובמחיר מצוין!
                     </p>
-                    <p class="text-lg text-gray-300 mb-4">
-                        מחכה לכם עם מופע קסמים מלא שמחה, צחוק והפתעות שישאיר את כולם פעורי פה ושמחים מאוד! 
+                    <p class="text-sm sm:text-base md:text-lg text-gray-300 mb-3 sm:mb-4">
+                    מחכה לכם עם מופע קסמים מלא שמחה, צחוק והפתעות שישאיר את כולם פעורי פה ושמחים מאוד! 
                     </p>
                 </div>
             </div>
         </section>
         
-        <div class="bg-gray-900 py-10 text-center">
-            <h3 class="text-2xl font-bold text-cyan-400 mb-4">להזמנות</h3>
-            <a href="tel:0544347168" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105">
+        <div class="bg-gray-900 py-8 sm:py-10 text-center px-4">
+            <h3 class="text-xl sm:text-2xl font-bold text-cyan-400 mb-3 sm:mb-4">להזמנות</h3>
+            <a href="tel:0544347168" class="inline-block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 sm:py-3 px-6 sm:px-8 rounded-full text-base sm:text-lg transition duration-300 transform hover:scale-105">
                 054-4347168
             </a>
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <h4 class="text-xl font-semibold mb-6 text-cyan-300">עקבו אחרי ברשתות החברתיות</h4>
-            <div class="flex justify-center space-x-6 space-x-reverse">
-                <a href="https://www.facebook.com/hyym.msmyym?mibextid=ZbWKwL" target="_blank" class="group">
-                    <div class="w-12 h-12 bg-gray-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg">
-                        <svg class="w-6 h-6 text-gray-300 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+    <footer class="bg-gray-800 text-white py-6 sm:py-8">
+        <div class="container mx-auto px-4 sm:px-6 text-center">
+            <h4 class="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-cyan-300">עקבו אחרי ברשתות החברתיות</h4>
+            <div class="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6">
+                <a href="https://www.facebook.com/hyym.msmyym?mibextid=ZbWKwL" target="_blank" class="group" aria-label="פייסבוק">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-700 hover:bg-blue-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-300 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                         </svg>
                     </div>
                 </a>
                 
-                <a href="https://www.tiktok.com/@haim_mismaim?_t=ZS-8yaexFyBxJv&_r=1" target="_blank" class="group">
-                    <div class="w-12 h-12 bg-gray-700 hover:bg-black rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg">
-                        <svg class="w-6 h-6 text-gray-300 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                <a href="https://www.tiktok.com/@haim_mismaim?_t=ZS-8yaexFyBxJv&_r=1" target="_blank" class="group" aria-label="טיקטוק">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-700 hover:bg-black rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-300 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
                         </svg>
                     </div>
                 </a>
                 
-                <a href="https://youtube.com/channel/UCIFkuc2RJc1TxJss3U3QLHg?si=BFvR-ak-Y6Sq39L1" target="_blank" class="group">
-                    <div class="w-12 h-12 bg-gray-700 hover:bg-red-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg">
-                        <svg class="w-6 h-6 text-gray-300 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                <a href="https://youtube.com/channel/UCIFkuc2RJc1TxJss3U3QLHg?si=BFvR-ak-Y6Sq39L1" target="_blank" class="group" aria-label="יוטיוב">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-700 hover:bg-red-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-300 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                         </svg>
                     </div>
                 </a>
                 
-                <a href="https://www.instagram.com/haim_mishmaim/" target="_blank" class="group">
-                    <div class="w-12 h-12 bg-gray-700 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg">
-                        <svg class="w-6 h-6 text-gray-300 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                <a href="https://www.instagram.com/haim_mishmaim/" target="_blank" class="group" aria-label="אינסטגרם">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-700 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-300 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07c3.252.148 4.772 1.915 4.981 4.981.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.148 3.252-1.915 4.772-4.981 4.981-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.772-1.915-4.981-4.981-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.148-3.252 1.915-4.772 4.981-4.981 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.633 0-4.07.016-5.485.072-4.785.22-7.234 2.686-7.456 7.456-.056 1.415-.072 1.852-.072 5.485s.016 4.07.072 5.485c.22 4.77 2.67 7.23 7.456 7.456 1.415.056 1.852.072 5.485.072s4.07-.016 5.485-.072c4.785-.22 7.23-2.686 7.456-7.456.056-1.415.072-1.852.072-5.485s-.016-4.07-.072-5.485c-.22-4.77-2.67-7.23-7.456-7.456-1.415-.056-1.852-.072-5.485-.072zM12 5.838c-3.462 0-6.262 2.8-6.262 6.262s2.8 6.262 6.262 6.262 6.262-2.8 6.262-6.262-2.8-6.262-6.262-6.262zm0 10.375c-2.268 0-4.113-1.845-4.113-4.113s1.845-4.113 4.113-4.113 4.113 1.845 4.113 4.113-1.845 4.113-4.113 4.113zm6.392-11.458c0 .874-.707 1.581-1.581 1.581s-1.581-.707-1.581-1.581.707-1.581 1.581-1.581 1.581.707 1.581 1.581z"/>
                         </svg>
                     </div>
                 </a>
                 
-                <a href="https://wa.me/972544347168" target="_blank" class="group">
-                    <div class="w-12 h-12 bg-gray-700 hover:bg-green-500 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg">
-                        <svg class="w-6 h-6 text-gray-300 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                <a href="https://wa.me/972544347168" target="_blank" class="group" aria-label="וואטסאפ">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-700 hover:bg-green-500 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-300 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12.04 2.87c-5.46 0-9.91 4.45-9.91 9.91 0 1.63.4 3.2.98 4.63L2.09 21.91l4.57-1.22c1.37.75 2.92 1.15 4.38 1.15 5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.91-9.91-9.91zm.04 17.06c-1.46 0-2.81-.39-4.04-1.07l-.29-.17-3.05.81.83-3.15-.19-.32c-.75-1.29-1.15-2.78-1.15-4.27 0-4.52 3.69-8.2 8.2-8.2 2.22 0 4.31.86 5.88 2.43 1.57 1.57 2.43 3.66 2.43 5.88 0 4.52-3.69 8.2-8.2 8.2zm4.1-5.75c-.23-.11-.97-.48-1.12-.53-.15-.05-.27-.08-.38.08-.11.16-.43.53-.55.64-.12.12-.23.13-.43.04-.2-.1-.84-.31-1.61-.99-.6-.52-1-1.17-1.12-1.37-.12-.2-.01-.31.09-.42.1-.1.23-.27.35-.43.12-.16.16-.27.23-.38.07-.11.03-.21-.02-.32-.05-.11-.47-1.13-.65-1.54-.18-.41-.36-.35-.55-.35-.19 0-.41-.03-.6-.03-.19 0-.5.07-.76.35-.26.28-1 1.01-1 2.46 0 1.45 1.02 2.85 1.16 3.04.14.19 2 3.05 4.85 4.22 2.84 1.16 3.61.96 4.26.9.64-.06 1.06-.43 1.22-.72.16-.29.11-.53.07-.64-.04-.11-.15-.17-.32-.26z"/>
                         </svg>
                     </div>
                 </a>
             </div>
+            <div class="container mx-auto px-4 sm:px-6 text-center mt-4 sm:mt-6">
+                <a href="#" id="open-accessibility-modal" class="text-sm sm:text-base text-cyan-400 hover:text-cyan-300 mx-2 sm:mx-3 font-semibold">הצהרת נגישות</a>
+                <span class="text-gray-500">|</span>
+                <a href="#" id="open-legal-modal" class="text-sm sm:text-base text-cyan-400 hover:text-cyan-300 mx-2 sm:mx-3 font-semibold">תנאי שימוש והגבלת אחריות</a>
+            </div>
         </div>
-        <p class="mt-8 text-gray-400 text-sm">&copy; 2025 חיים משמיים. כל הזכויות שמורות.</p>
+        <p class="mt-6 sm:mt-8 text-gray-400 text-xs sm:text-sm px-4">&copy; 2025 חיים משמיים. כל הזכויות שמורות.</p>
     </footer>
 
     <div id="image-modal" class="flex">
         <span id="close-modal">&times;</span>
         <img id="modal-image" src="" alt="תמונה מוגדלת" />
     </div>
+    
+    <div id="accessibility-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="acc-title">
+        <div class="modal-content text-right">
+            <span class="close-btn" data-modal="accessibility-modal" aria-label="סגור חלון">×</span>
+            <h3 id="acc-title" class="text-3xl font-bold mb-6 text-cyan-400">הצהרת נגישות</h3>
+            <p class="text-gray-300 mb-4">אתר זה נבנה מתוך מחויבות לאפשר את השימוש בו בצורה שוויונית ונוחה לכלל האוכלוסייה, כולל אנשים עם מוגבלויות, בהתאם לדרישות תקן הנגישות WCAG 2.1 ברמה AA ובהתאם לחוקי הנגישות הישראליים.</p>
+            <h4 class="text-xl font-semibold mb-2 text-cyan-500">התאמות שבוצעו באתר:</h4>
+            <ul class="list-disc pr-6 mb-4 text-gray-400">
+                <li>ממשק הנגשה (A11Y Panel) המאפשר שינוי גודל טקסט, ניגודיות ושימוש בגווני אפור.</li>
+                <li>שימוש בתגיות ARIA ובניית מבנה סמנטי תקין לטובת קוראי מסך.</li>
+                <li>קישור 'דלג לתוכן הראשי' לניווט מהיר באמצעות מקלדת.</li>
+                <li>התאמה מלאה לשימוש במקלדת (ניווט באמצעות מקש Tab).</li>
+                <li>שימוש בטקסט אלטרנטיבי לכל התמונות החשובות.</li>
+            </ul>
+            <h4 class="text-xl font-semibold mb-2 text-cyan-500">רכז נגישות ליצירת קשר:</h4>
+            <p class="text-gray-300 mb-2">שם: יאיר פרץ (מאסטר קוד)</p>
+            <p class="text-gray-300 mb-2">טלפון: <a href="tel:0522091733" class="text-cyan-400 hover:text-cyan-300">052-209-1733</a></p>
+            <p class="text-gray-300 mb-2">דוא"ל: <a href="mailto:przyyryair@gmail.com" class="text-cyan-400 hover:text-cyan-300">przyyryair@gmail.com</a></p>
+            <p class="text-gray-300 mt-4 text-sm">הצהרת הנגישות עודכנה לאחרונה בתאריך: 30 נובמבר 2025.</p>
+        </div>
+    </div>
+
+    <div id="legal-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="legal-title">
+        <div class="modal-content text-right">
+            <span class="close-btn" data-modal="legal-modal" aria-label="סגור חלון">×</span>
+            <h3 id="legal-title" class="text-3xl font-bold mb-6 text-cyan-400">תנאי שימוש והגבלת אחריות</h3>
+            <h4 class="text-xl font-semibold mb-2 text-cyan-500">קניין רוחני:</h4>
+            <p class="text-gray-300 mb-4">כל התוכן, העיצוב הגרפי, הקוד והמידע המופיעים באתר זה ("התוכן") הם קניינו הבלעדי של 'חיים משמיים' או ניתנים לו ברישיון שימוש. אין להעתיק, להפיץ, להציג בפומבי או למסור לצד שלישי כל חלק מהתוכן, ללא הסכמה מראש ובכתב מ'חיים משמיים'.</p>
+            <h4 class="text-xl font-semibold mb-2 text-cyan-500">הגבלת אחריות:</h4>
+            <p class="text-gray-300 mb-4">השירותים והמידע באתר ניתנים 'כמות שהם' (As Is). השימוש באתר נעשה על אחריות המשתמש הבלעדית. 'חיים משמיים' אינו מתחייב שהשירותים לא יופרעו, יינתנו כסדרם ללא הפסקות, יהיו חסינים מפני נזקים, תקלות, או שיהיו ללא טעויות.</p>
+        </div>
+    </div>
 
     <script>
+        // *** פונקציונליות גלריה קיימת ***
         const modal = document.getElementById('image-modal');
         const modalImg = document.getElementById('modal-image');
         const closeModalBtn = document.getElementById('close-modal');
@@ -337,6 +606,168 @@
                 modalImg.src = '';
                 modalImg.alt = '';
             }
+        });
+        
+        /* ********************************************************* */
+        /* JavaScript נגישות - A11Y FUNCTIONS & MODAL LOGIC */
+        /* ********************************************************* */
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const a11yPanel = document.getElementById('a11y-panel');
+            const a11yToggleButton = document.getElementById('a11y-toggle-button');
+            const contrastBtn = document.getElementById('toggle-contrast');
+            const grayscaleBtn = document.getElementById('toggle-grayscale');
+            const textBtn = document.getElementById('increase-text');
+            const cursorBtn = document.getElementById('toggle-cursor');
+            const focusBtn = document.getElementById('toggle-focus');
+            const resetBtn = document.getElementById('reset-a11y');
+
+            // --- Modal Logic ---
+            const accModal = document.getElementById('accessibility-modal');
+            const legalModal = document.getElementById('legal-modal');
+            const openAccBtn = document.getElementById('open-accessibility-modal');
+            const openLegalBtn = document.getElementById('open-legal-modal');
+            const closeButtons = document.querySelectorAll('.modal .close-btn');
+
+            function openModal(modalElement) {
+                modalElement.style.display = 'flex';
+                modalElement.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling on body
+                // Focus the close button for accessibility
+                modalElement.querySelector('.close-btn').focus();
+            }
+
+            function closeModal(modalElement) {
+                modalElement.style.display = 'none';
+                modalElement.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = 'auto';
+            }
+
+            openAccBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(accModal);
+            });
+
+            openLegalBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(legalModal);
+            });
+
+            closeButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const modalId = btn.getAttribute('data-modal');
+                    const modalElement = document.getElementById(modalId);
+                    if (modalElement) closeModal(modalElement);
+                });
+            });
+
+            // Close modals if user clicks outside the modal content
+            window.addEventListener('click', (event) => {
+                if (event.target === accModal) {
+                    closeModal(accModal);
+                }
+                if (event.target === legalModal) {
+                    closeModal(legalModal);
+                }
+            });
+            
+            // Close modals on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (accModal.style.display === 'flex') {
+                        closeModal(accModal);
+                    }
+                    if (legalModal.style.display === 'flex') {
+                        closeModal(legalModal);
+                    }
+                }
+            });
+
+            // --- A11Y Panel Toggle ---
+            a11yToggleButton.addEventListener('click', () => {
+                const isExpanded = a11yPanel.classList.toggle('a11y-panel-open');
+                a11yToggleButton.setAttribute('aria-expanded', isExpanded);
+                if (isExpanded) {
+                    // Focus the first button in the panel when opened
+                    contrastBtn.focus();
+                } else {
+                    // Re-focus the toggle button when panel is closed
+                    a11yToggleButton.focus();
+                }
+            });
+
+            // --- A11Y Features Logic (Same as before) ---
+            
+            // Load state from localStorage on load
+            ['high-contrast', 'grayscale', 'large-text', 'large-cursor', 'focus-highlight'].forEach(feature => {
+                const featureKey = feature.replace(/-/g, '_');
+                const btnId = `toggle-${feature.replace(/-/g, '')}`;
+                const btn = document.getElementById(btnId);
+
+                if (localStorage.getItem(feature) === 'true') {
+                    body.classList.add(`a11y-${featureKey}`);
+                    if (btn && btn.hasAttribute('aria-pressed')) {
+                        btn.setAttribute('aria-pressed', 'true');
+                    }
+                }
+            });
+
+            // Helper function to toggle classes and save state
+            function toggleA11yFeature(className, localStorageKey, btn) {
+                const isActive = body.classList.contains(className);
+                if (isActive) {
+                    body.classList.remove(className);
+                    localStorage.setItem(localStorageKey, 'false');
+                    if (btn && btn.hasAttribute('aria-pressed')) btn.setAttribute('aria-pressed', 'false');
+                } else {
+                    body.classList.add(className);
+                    localStorage.setItem(localStorageKey, 'true');
+                    if (btn && btn.hasAttribute('aria-pressed')) btn.setAttribute('aria-pressed', 'true');
+                }
+            }
+
+            // High Contrast
+            contrastBtn.addEventListener('click', () => {
+                toggleA11yFeature('a11y-high-contrast', 'high-contrast', contrastBtn);
+            });
+
+            // Grayscale
+            grayscaleBtn.addEventListener('click', () => {
+                toggleA11yFeature('a11y-grayscale', 'grayscale', grayscaleBtn);
+            });
+
+            // Increase Text Size
+            textBtn.addEventListener('click', () => {
+                body.classList.toggle('a11y-large-text');
+                const isActive = body.classList.contains('a11y-large-text');
+                localStorage.setItem('large-text', isActive);
+                textBtn.setAttribute('aria-pressed', isActive);
+            });
+
+            // Large Cursor
+            cursorBtn.addEventListener('click', () => {
+                toggleA11yFeature('a11y-large-cursor', 'large-cursor', cursorBtn);
+            });
+
+            // Focus Highlight
+            focusBtn.addEventListener('click', () => {
+                toggleA11yFeature('a11y-focus-highlight', 'focus-highlight', focusBtn);
+            });
+
+            // Reset All
+            resetBtn.addEventListener('click', () => {
+                body.classList.remove('a11y-high-contrast', 'a11y-grayscale', 'a11y-large-text', 'a11y-large-cursor', 'a11y-focus-highlight');
+                localStorage.removeItem('high-contrast');
+                localStorage.removeItem('grayscale');
+                localStorage.removeItem('large-text');
+                localStorage.removeItem('large-cursor');
+                localStorage.removeItem('focus-highlight');
+                // Reset buttons
+                [contrastBtn, grayscaleBtn, cursorBtn, focusBtn, textBtn].forEach(btn => {
+                    if (btn && btn.hasAttribute('aria-pressed')) btn.setAttribute('aria-pressed', 'false');
+                });
+                alert('הגדרות הנגישות אופסו.');
+            });
         });
     </script>
 </body>
